@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8e0f5; /* Light pink background */
+            color: #333;
+        }
+
+        h1, h2 {
+            color: #ff4d94; /* Bright pink */
+            text-align: center;
+            margin-top: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .message {
+           
+            color: rgb(0, 0, 0);
+            padding: 10px;
+            margin: 20px;
+            border-radius: 5px;
+        }
+
+        /* Add Candidate Form (Card Style) */
+        .card {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: cardSlideUp 1.5s ease-out;
+        }
+
+        input, button {
+            width: 95%;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        input[type="text"] {
+            background-color: #fce4ec; /* Light pink input background */
+        }
+
+        button {
+            padding: 15px 25px;
+            background-color: #ff4081; /* Bright pink */
+            border-radius: 8px;
+            color: white;
+          font-size: 1.5rem;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #e040fb; /* Darker pink on hover */
+            transition: background-color 0.3s ease;
+        }
+
+        /* Candidates Table */
+        table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            animation: fadeIn 2s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 1.5rem;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ff80ab; /* Light pink table header */
+            color: white;
+        }
+
+        td img {
+            max-width: 100px;
+            max-height: 100px;
+            transition: transform 0.3s;
+        }
+
+        td img:hover {
+            transform: scale(1.2);
+        }
+
+        /* Control Voting and Show Results Cards */
+        .control-card {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: cardSlideUp 1.5s ease-out;
+        }
+
+        .control-buttons {
+            display: flex;
+            justify-content: space-evenly;
+            gap: 20px;
+            margin-top: 20px;
+            font-family: 'Arial, sans-serif' !important;
+        }
+
+        .control-buttons button {
+            padding: 15px 25px;
+            background-color: #ff4081; /* Bright pink */
+            border-radius: 8px;
+            color: white;
+          font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .control-buttons button:hover {
+            background-color: #e040fb; /* Darker pink on hover */
+            transition: background-color 0.3s ease;
+        }
+        /* Instruction Section */
+.instructions {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+    font-size: 16px;
+}
+
+.instructions p {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+ 
+    color: #000000; /* Bright pink for instruction text */
+}
+
+.voting-graphic {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+        /* Animation Effects */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes cardSlideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .btn{
+            width: 20%;
+             padding: 15px 25px;
+            background-color: #ff4081; /* Bright pink */
+            border-radius: 8px;
+            color: white;
+          font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .show{
+            padding: 15px 25px;
+            background-color: #ff4081; /* Bright pink */
+            border-radius: 8px;
+            color: white;
+          font-size: 1.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Admin Dashboard</h1>
+
+    <% if (message) { %>
+        <div class="message"><%= message %></div>
+    <% } %>
+</header>
+
+<!-- Add Candidate Form (Card Style) -->
+<div class="card">
+    <h2>Add Candidate</h2>
+    <form action="/admin/add-candidate" method="POST">
+        <input type="text" name="name" placeholder="Candidate Name" required />
+        <input type="text" name="position" placeholder="Position (e.g., President)" required />
+        <input type="text" name="symbol" placeholder="Symbol URL" required />
+        <input type="text" name="party" placeholder="Party Name" required />
+        <button type="submit">Add Candidate</button>
+    </form>
+</div>
+
+<!-- Candidates Table -->
+<h2>Candidates</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Symbol</th>
+            <th>Party</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% candidates.forEach(candidate => { %>
+            <tr>
+                <td><%= candidate.name %></td>
+                <td><%= candidate.position %></td>
+                <td><img src="<%= candidate.symbol %>" alt="Symbol"></td>
+                <td><%= candidate.party %></td>
+                <td>
+                    <form action="/admin/remove-candidate/<%= candidate._id %>" method="POST" style="display:inline;">
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+<!-- Control Voting Section in Card -->
+<div class="control-card">
+    <h2>Control Voting</h2>
+    
+    <div class="instructions">
+        <p>Before starting the voting process, make sure you have added candidates and are ready to collect votes. Once the voting begins, voters will be able to cast their votes for their preferred candidates.</p>
+        <img src="/images/banner3.jpeg" alt="Voting Graphic" class="voting-graphic">
+    </div>
+    
+    <div class="control-buttons">
+        <form action="/admin/start-voting" method="POST">
+            <button type="submit">Start Voting</button>
+        </form>
+        <form action="/admin/stop-voting" method="POST">
+            <button type="submit">Stop Voting</button>
+        </form>
+    </div>
+</div>
+
+
+<!-- Show Results Section in Card -->
+<% if (!votingActive) { %>
+    <div class="control-card">
+        <h2>Show Results</h2>
+        <form action="/admin/show-results" method="GET">
+            <button class="show" type="submit">Show Voting Results</button>
+        </form>
+    </div>
+<% } %>
+
+<!-- Voters Who Haven't Voted Table -->
+<h2>Voters Who Haven't Voted</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% notVoted.forEach(voter => { %>
+            <tr>
+                <td><%= voter.name %></td>
+                <td><%= voter.email %></td>
+                <td><%= voter.phone %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+<!-- Back to Index Button -->
+<form action="/" method="GET" style="text-align: center; margin-top: 20px;">
+    <button class="btn" type="submit">Back</button>
+</form>
+
+</body>
+</html>

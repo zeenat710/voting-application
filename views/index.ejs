@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting Platform</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file for styling -->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+        h1, h2, h3 {
+            font-weight: bold;
+        }
+        
+        /* Header */
+     /* Header Styles */
+header {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    color: white;
+    text-align: center;
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeInHeader 1.5s ease-in-out;
+}
+
+header h1 {
+    font-size: 4em;
+    margin: 0;
+    letter-spacing: 2px;
+    animation: slideInLeft 1s ease-out;
+}
+
+header p {
+    font-size: 1.5em;
+    margin-top: 20px;
+    animation: slideInRight 1s ease-out;
+}
+/* Header Style with Animated Gradient Background and Text Animation */
+.header {
+    text-align: center;
+    padding: 100px 0;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    position: relative;
+    animation: gradientAnimation 2s infinite alternate;
+    border-bottom: 5px solid #fff;
+}
+
+/* Animated Gradient Background */
+@keyframes gradientAnimation {
+    0% {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    }
+    100% {
+        background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+    }
+}
+
+/* Header Title Animation */
+.header-title {
+    font-size: 4em;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    animation: slideIn 1.5s ease-out;
+}
+
+/* Slide In Animation for Header Title */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Subtitle Style */
+.header-subtitle {
+    font-size: 1.5em;
+    font-family: 'Arial', sans-serif;
+    margin-top: 20px;
+    animation: fadeIn 2s ease-out;
+}
+
+/* Fade In Animation for Subtitle */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Adding a Shine Effect to the Header Text */
+.header-title:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    background: white;
+    animation: shineEffect 2s linear infinite;
+}
+
+@keyframes shineEffect {
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
+
+
+/* Navbar Styles */
+nav {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    padding: 20px 0;
+    text-align: center;
+    animation: slideInNav 1s ease-in-out;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    position: relative;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #2563eb;
+    transform: scale(1.1);
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background: white;
+    left: 50%;
+    bottom: -5px;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Animation for navbar appearance */
+@keyframes slideInNav {
+    0% { opacity: 0; transform: translateY(-50px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+        /* Sections */
+        section {
+            padding: 60px 20px;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+        section h2 {
+            color: #2563eb;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        section p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+        /* Section Styles  feature style */
+        /* Features Section */
+#features {
+    padding: 60px 20px;
+    text-align: center;
+    animation: fadeInUp 1.5s ease-out;
+}
+
+/* Heading Styling */
+#features h2 {
+    color: #2563eb;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Features List Styling */
+.features-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.feature-item {
+    font-size: 1.3em;
+    margin: 15px;
+    color: #333;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px); /* Start with items slightly lower */
+    animation: fadeInUpList 0.6s ease-out forwards;
+    width: 200px; /* Control the size of the items */
+}
+
+.feature-icon {
+    font-size: 3em;
+    color: #2563eb;
+    margin-bottom: 10px;
+}
+
+/* Adding delay to make items appear one by one */
+.feature-item:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.feature-item:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.feature-item:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.feature-item:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+/* Hover effect */
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation for each list item */
+@keyframes fadeInUpList {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Animation for each list item */
+@keyframes fadeInUpList {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Adding delay to make items appear one by one */
+.features-list li:nth-child(1) {
+    animation-delay: 0.2s;
+}
+.features-list li:nth-child(2) {
+    animation-delay: 0.4s;
+}
+.features-list li:nth-child(3) {
+    animation-delay: 0.6s;
+}
+.features-list li:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+
+        /* Hero Image */
+        .hero-img {
+            width: 40%;
+            height: auto;
+        
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Buttons */
+        .cta-button {
+            display: inline-block;
+            margin: 20px;
+            padding: 15px 30px;
+            background-color: #2563eb;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #1d4ed8;
+            transform: scale(1.05);
+        }
+
+        /* Cards */
+        .card-container {
+            display: block; /* Changed to block to stack cards vertically */
+            margin-top: 40px;
+            animation: fadeInUp 1s ease-out;
+        }
+        .card {
+            background-color: white;
+            width: 80%; /* 80% width to make cards more centered */
+            max-width: 600px; /* Set max-width for better display on larger screens */
+            padding: 20px;
+            margin: 20px auto; /* Center cards horizontally and add spacing between them */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card h3 {
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .card .date, .card .positions {
+            font-weight: bold;
+            color: #333;
+        }
+        #how-it-works {
+        padding: 60px 20px;
+        text-align: center;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    #how-it-works h2 {
+        color: #2563eb;
+        font-size: 2.5em;
+        margin-bottom: 40px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .steps-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 40px;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .step {
+        background-color: #ffffff;
+        padding: 20px;
+        width: 250px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        opacity: 0;
+        transform: translateY(50px);
+        animation: fadeInStep 1s forwards;
+    }
+
+    .step:nth-child(1) {
+        animation-delay: 0.2s;
+    }
+
+    .step:nth-child(2) {
+        animation-delay: 0.4s;
+    }
+
+    .step:nth-child(3) {
+        animation-delay: 0.6s;
+    }
+
+    .step:nth-child(4) {
+        animation-delay: 0.8s;
+    }
+
+    .step-icon {
+        font-size: 3em;
+        color: #2563eb;
+        margin-bottom: 20px;
+        animation: bounce 0.8s infinite alternate;
+    }
+
+    .step h3 {
+        color: #2563eb;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .step p {
+        font-size: 1.1em;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .step:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+   
+
+    /* Animations */
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInStep {
+        0% { opacity: 0; transform: translateY(50px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+    }
+
+        /* Footer */
+        footer {
+            background-color: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            padding: 0 10px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        /* Image Animation */
+@keyframes fadeInZoom {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Apply the animation */
+
+
+
+
+
+        /* Features List */
+        .features-list li {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        .features-list li:before {
+            content: "✔️ ";
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            section h2 {
+                font-size: 2em;
+            }
+            nav a {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="header-title">Voting Page</h1>
+        <p class="header-subtitle">Your vote matters! Participate in shaping the future.</p>
+    </header>
+    
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/vote">Go to Voting Page</a>
+        <a href="/admin">Go to Admin Dashboard</a>
+        <a href="/logout">Log Out</a>
+    </nav>
+
+<section id="about">
+    <h2>About Us</h2>
+    <p>At <strong>Your Voting Platform</strong>, we believe that every voice counts. Our mission is to empower citizens by providing a transparent, secure, and user-friendly platform where they can cast their votes with confidence. Whether you're voting in local elections or national ones, we ensure the process is seamless and accessible to everyone.</p>
+    <p>We are committed to making the voting process easier for all by integrating cutting-edge technology to guarantee the integrity of each vote. Our platform uses robust security measures to protect your personal information, and we provide real-time updates throughout the election period.</p>
+   
+    <img src="/images/banner3.jpeg" alt="Voting Banner" class="hero-img">
+</section>
+
+<section id="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps-container">
+        <div class="step" data-step="1">
+            <div class="step-icon">&#128077;</div>
+            <h3>Register</h3>
+            <p>Create an account with your details.</p>
+        </div>
+        <div class="step" data-step="2">
+            <div class="step-icon">&#128100;</div>
+            <h3>Login</h3>
+            <p>Access your dashboard.</p>
+        </div>
+        <div class="step" data-step="3">
+            <div class="step-icon">&#9993;</div>
+            <h3>Vote</h3>
+            <p>Select your preferred candidate and cast your vote.</p>
+        </div>
+        <div class="step" data-step="4">
+            <div class="step-icon">&#127940;</div>
+            <h3>Results</h3>
+            <p>Wait for the results to be announced after the voting period ends.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Election Cards Section -->
+<section id="elections">
+    <h2>Upcoming Elections</h2>
+    <div class="card-container">
+        <!-- Current Election Card -->
+        <div class="card">
+            <h3>2024 National Elections</h3>
+            <p class="date">Voting Period: December 1, 2024 - December 15, 2024</p>
+            <p class="positions">Positions: President, Vice President, Senators</p>
+            <a href="/vote" class="cta-button" style="text-decoration: none; padding: 10px 20px; background-color: #2563eb; color: white; border-radius: 5px;">Vote Now</a>
+        </div>
+
+        <!-- Future Election Card -->
+        <div class="card">
+            <h3>2025 Local Elections</h3>
+            <p class="date">Voting Period: June 1, 2025 - June 15, 2025</p>
+            <p class="positions">Positions: Mayor, Councilors, Assembly Members</p>
+            <a href="/vote" class="cta-button" style="text-decoration: none; padding: 10px 20px; background-color: #2563eb; color: white; border-radius: 5px;">Vote Now</a>
+        </div>
+    </div>
+</section>
+<section id="features">
+    <h2>Platform Features</h2>
+    <ul class="features-list">
+        <li class="feature-item">
+            <div class="feature-icon">&#128275;</div>
+            <p>Secure Voting</p>
+        </li>
+        <li class="feature-item">
+            <div class="feature-icon">&#128241;</div>
+            <p>User-Friendly Interface</p>
+        </li>
+        <li class="feature-item">
+            <div class="feature-icon">&#128202;</div>
+            <p>Real-Time Voting Updates</p>
+        </li>
+        <li class="feature-item">
+            <div class="feature-icon">&#128187;</div>
+            <p>Transparency in Results</p>
+        </li>
+    </ul>
+</section>
+
+<section id="cta">
+    <h2>Get Involved Today!</h2>
+    <a href="/register" class="cta-button">Register Now</a>
+    <a href="/login" class="cta-button">Login to Vote</a>
+</section>
+
+<footer>
+    <p>© 2024 Your Voting Platform. All rights reserved.</p>
+    <p>
+        <a href="/privacy-policy">Privacy Policy</a> | 
+        <a href="/terms">Terms & Conditions</a> | 
+        <a href="/contact">Contact Us</a>
+    </p>
+</footer>
+
+</body>
+</html>

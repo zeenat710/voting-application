@@ -1,0 +1,178 @@
+<style>
+    /* Header and Title Animation */
+    h1 {
+        text-align: center;
+        font-size: 3.5em;
+        color: #34495e;
+        font-family: 'Roboto', sans-serif;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 1.5s ease-out;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 2em;
+        color: #2ecc71;
+        font-family: 'Roboto', sans-serif;
+        animation: fadeInUp 1.5s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Table Style */
+    table {
+        width: 80%;
+        margin: 30px auto;
+        border-collapse: collapse;
+        font-family: 'Arial', sans-serif;
+        animation: fadeInTable 2s ease-in-out;
+    }
+
+    @keyframes fadeInTable {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #2980b9;
+        color: white;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    td {
+        background-color: #f9f9f9;
+        font-size: 1.1em;
+    }
+
+    tr:nth-child(even) td {
+        background-color: #ecf0f1;
+    }
+
+    tr:hover {
+        background-color: #d5dbdb;
+        cursor: pointer;
+        transform: translateY(-5px);
+        transition: transform 0.3s ease;
+    }
+
+    /* Vote Margin Styling */
+    .vote-margin {
+        color: #e74c3c;
+        font-weight: bold;
+    }
+/* Card container styling */
+.card {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 400px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Title styling */
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+/* Card content styling */
+.card-content {
+  font-size: 18px;
+  color: #34495e;
+}
+
+.card-content h3 {
+  margin: 10px 0;
+}
+
+/* Party symbol styling */
+.party-symbol {
+  width: 50px;
+  height: auto;
+  margin-top: 10px;
+}
+
+
+
+    /* Link Styling */
+    a {
+        display: block;
+        text-align: center;
+        padding: 12px 25px;
+        background-color: #3498db;
+        color: white;
+        font-size: 1.2em;
+        text-decoration: none;
+        border-radius: 5px;
+        width: 200px;
+        margin: 30px auto;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    a:hover {
+        background-color: #2980b9;
+        transform: scale(1.05);
+    }
+
+</style>
+
+<h1>Voting Results</h1>
+
+<% if (winner) { %>
+    <div class="card">
+      <div class="fireworks"></div>
+      <h2 class="card-title">Winner: <%= winner.name %> with <%= winner.votes %> votes</h2>
+      <div class="card-content">
+        <h3>Position: <%= winner.position %></h3>
+        <h3>Party: <%= winner.party %></h3>
+        
+      </div>
+    </div>
+  <% } else { %>
+    <h2>No votes yet</h2>
+  <% } %>
+<h2>Vote Counts</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Party</th>
+            <th>Votes</th>
+            <th>Vote Margin</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% candidates.forEach((candidate, index) => { %>
+            <tr>
+                <td><%= candidate.name %></td>
+                <td><%= candidate.position %></td>
+                <td><%= candidate.party %></td>
+                <td><%= candidate.votes %></td>
+                <td>
+                    <% if (index === 0) { %>
+                        <%= 'N/A' %> <!-- No margin for the winner -->
+                    <% } else { %>
+                        <span class="vote-margin"><%= candidate.votes - candidates[0].votes %> votes behind</span>
+                    <% } %>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+<a href="/admin">Back</a>
